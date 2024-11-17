@@ -26,7 +26,7 @@
         /* Movie Header */
         .movie-header {
             position: relative;
-            height: 500px; /* Taille de l'image et de la vidéo */
+            height: 600px; /* Taille de l'image plus grande */
             background: url('https://occ-0-4164-55.1.nflxso.net/dnm/api/v6/E8vDc_W8CLv7-yMQu8KMEC7Rrr8/AAAABfsKMLiYPqk57f2xOUvtRk7LM1uyaVvFGCMCiTZ9KRGOmzO-nw8lG_dtaGdEYhH_EF01J8DN29j-oD6LPzCaLYd0bpJsVcJGeiFK.webp?r=2d1') no-repeat center center/cover;
             width: 100%;
             overflow: hidden;
@@ -45,7 +45,7 @@
         /* Movie Logo */
         .movie-logo {
             position: absolute;
-            bottom: 30px;
+            bottom: 10px; /* Le logo est plus proche du bas */
             left: 40px;
             width: 250px;
             z-index: 10;
@@ -68,7 +68,7 @@
             display: flex;
             gap: 15px;
             margin: 20px 40px;
-            justify-content: center;
+            justify-content: flex-start; /* Déplace les boutons à gauche */
             flex-wrap: wrap;
         }
 
@@ -233,12 +233,13 @@
 <body>
     <div class="movie-modal">
         <div class="movie-header">
-            <img src="https://occ-0-4164-55.1.nflxso.net/dnm/api/v6/tx1O544a9T7n8Z_G12qaboulQQE/AAAABWNmVx49S7zuNJRf0n5_8PikH0Uc5K913PSRho5F-SgvaxVx7t2TU1HT_-07S07jwEi7RiRfw9kLyB6uqMVPmb_36nKbbBuCcxfsnp9ZQJE.webp?r=6e0" alt="Movie Logo" class="movie-logo">
+            <!-- Movie Logo -->
+            <img src="https://occ-0-4164-55.1.nflxso.net/dnm/api/v6/tx1O544a9T7n8Z_G12qaboulQQE/AAAABUaqEdvBz4ldEANhaXztqO7JGiMWmULTaTNP8fmKikg3WR0MGO5Rv6r95OiF5_ELZf0ub9yF_Yks9Zh4GbQF80h2N4QRUbfyDwJRV5R7eV4.webp?r=2ae" alt="Movie Logo" class="movie-logo">
         </div>
 
         <!-- Video element -->
         <video class="movie-video" id="movie-video" autoplay muted>
-            <source src="" type="video/mp4">
+            <source src="path-to-video.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
 
@@ -292,7 +293,6 @@
     <script>
         window.onload = function() {
             setTimeout(function() {
-                document.querySelector('.movie-header').style.opacity = '0';
                 const video = document.getElementById('movie-video');
                 video.style.display = 'block';
                 video.style.opacity = '1';
