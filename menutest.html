@@ -26,8 +26,9 @@
         /* Movie Header */
         .movie-header {
             position: relative;
-            height: 500px;
+            height: 400px;
             background: url('path-to-your-movie-image.jpg') no-repeat center center/cover;
+            transition: opacity 2s ease-in-out;
         }
 
         .movie-header::after {
@@ -42,20 +43,21 @@
 
         .movie-logo {
             position: absolute;
-            bottom: 40px;
-            left: 40px;
-            width: 200px;
+            bottom: 10px;
+            left: 20px;
+            width: 150px;
         }
 
+        /* Movie Actions */
         .movie-actions {
             display: flex;
-            gap: 20px;
-            margin: 30px 40px;
+            gap: 15px;
+            margin: 20px 40px;
         }
 
         .movie-actions button {
-            padding: 15px 30px;
-            font-size: 18px;
+            padding: 12px 25px;
+            font-size: 16px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
@@ -81,8 +83,9 @@
             background-color: rgba(255, 255, 255, 0.5);
         }
 
+        /* Movie Details */
         .movie-details {
-            padding: 30px 40px;
+            padding: 20px 40px;
         }
 
         .movie-info {
@@ -107,6 +110,18 @@
             margin-top: 8px;
         }
 
+        /* Video */
+        .movie-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            display: none;
+            transition: opacity 2s ease-in-out;
+        }
+
         /* Titles Section */
         .titles-section {
             margin-top: 40px;
@@ -115,14 +130,30 @@
         .titles-section h2 {
             margin-left: 40px;
             margin-bottom: 20px;
-            font-size: 22px;
+            font-size: 24px;
             font-weight: bold;
         }
 
+        /* Images above the films */
+        .section-images {
+            display: flex;
+            gap: 15px;
+            margin: 0 40px 20px;
+            overflow-x: auto;
+        }
+
+        .section-images img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        /* Titles Grid */
         .titles-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
+            gap: 20px;
             padding: 0 40px 40px;
         }
 
@@ -164,8 +195,13 @@
 <body>
     <div class="movie-modal">
         <div class="movie-header">
-            <img src="path-to-your-logo.png" alt="Movie Logo" class="movie-logo">
+            <img src="https://occ-0-4164-55.1.nflxso.net/dnm/api/v6/tx1O544a9T7n8Z_G12qaboulQQE/AAAABWNmVx49S7zuNJRf0n5_8PikH0Uc5K913PSRho5F-SgvaxVx7t2TU1HT_-07S07jwEi7RiRfw9kLyB6uqMVPmb_36nKbbBuCcxfsnp9ZQJE.webp?r=6e0" alt="Movie Logo" class="movie-logo">
         </div>
+        <!-- Video element -->
+        <video class="movie-video" id="movie-video" autoplay muted>
+            <source src="path-to-your-video.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
 
         <div class="movie-actions">
             <button class="btn-play">Lecture</button>
@@ -207,38 +243,26 @@
                         <div class="title-description">Quand un hérisson effronté se retrouve sur Terre, il fait équipe avec un shérif pour récupérer ses anneaux.</div>
                     </div>
                 </div>
-                <!-- Film 3 -->
-                <div class="title-card">
-                    <img src="path-to-spongebob.jpg" alt="Bob l'éponge">
-                    <div class="title-details">
-                        <div class="title-info">Tous publics • HD • 2015 • 1h 35min</div>
-                        <div class="title-description">C'est la panique à Bikini Bottom lorsque Bob l'éponge part en mission pour sauver la recette secrète.</div>
-                    </div>
-                </div>
                 <!-- Add more films -->
-                <div class="title-card">
-                    <img src="path-to-pokemon.jpg" alt="Detective Pikachu">
-                    <div class="title-details">
-                        <div class="title-info">7+ • HD • 2019 • 1h 44min</div>
-                        <div class="title-description">Un Pikachu détective aide un jeune homme à retrouver son père disparu.</div>
-                    </div>
-                </div>
-                <div class="title-card">
-                    <img src="path-to-naya.jpg" alt="Le Royaume de Naya">
-                    <div class="title-details">
-                        <div class="title-info">Tous publics • HD • 2020 • 1h 39min</div>
-                        <div class="title-description">Une aventure féerique dans un royaume magique avec des créatures fantastiques.</div>
-                    </div>
-                </div>
-                <div class="title-card">
-                    <img src="path-to-trolls.jpg" alt="Les Trolls">
-                    <div class="title-details">
-                        <div class="title-info">Tous publics • HD • 2016 • 1h 32min</div>
-                        <div class="title-description">Les trolls colorés partent à l'aventure pour sauver leurs amis capturés par les bergens.</div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
+
+    <script>
+        // Wait for 2 seconds before replacing the image with the video
+        window.onload = function() {
+            setTimeout(function() {
+                // Fade out the movie header image
+                document.querySelector('.movie-header').style.opacity = '0';
+
+                // Show the video
+                const video = document.getElementById('movie-video');
+                video.style.display = 'block';
+
+                // Fade in the video with a smooth transition
+                video.style.opacity = '1';
+            }, 2000); // Delay of 2 seconds
+        };
+    </script>
 </body>
 </html>
