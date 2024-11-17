@@ -68,10 +68,10 @@
         /* Movie Actions (Buttons) */
         .movie-actions {
             position: absolute;
-            bottom: 250px; /* Positionnement des boutons sur l'image */
+            bottom: 30%; /* Positionnement des boutons sur l'image */
             left: 450px;
             display: flex;
-            gap: 15px;
+            gap: 20px;
             z-index: 10;
         }
 
@@ -263,14 +263,14 @@
         /* Le cercle principal */
         .circle {
             display: block;
-            position: relative;
+            position: fixed;
             padding: 0;
             margin: 0 auto;
             border-radius: 50%;
             height: 60px;
             width: 60px;
-            background-color: #141414; /* Couleur transparente */
-            border: 2px solid var(--black); /* Ajout d'une bordure noire pour visibilité */
+background-color: rgba(20, 20, 20, 0.5); /* Fond transparent avec une couleur légèrement sombre */
+    backdrop-filter: blur(10px); /* Applique l'effet de flou */            border: 2px solid var(--black); /* Ajout d'une bordure noire pour visibilité */
             transition: 0.2s;
             text-align: center;
             box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.3);
@@ -470,7 +470,7 @@
         .toggleSwitch {
             width: 50px;
             height: 50px;
-            position: relative;
+            position: fixed;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -546,7 +546,7 @@
         /* Positionner le toggle switch à droite et centré verticalement */
         .toggle-container {
             position: fixed;
-            top: 65%;
+            top: 67%;
             right: 450px; /* Décalage du côté droit */
             transform: translateY(-50%); /* Centrer verticalement */
             z-index: 999; /* Pour être au-dessus des autres éléments */
