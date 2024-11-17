@@ -246,6 +246,224 @@
     </style>
 </head>
 <body>
+  
+  <style>
+        /* Wrapper positionné pour être centré à droite */
+        .wrapper {
+    position: fixed;
+    top: 67%; /* Centré verticalement par rapport à la fenêtre */
+    right: 1090px; /* Placé à droite de l'écran */
+    transform: translateY(-50%); /* Pour s'assurer qu'il est parfaitement centré */
+    width: 60px;
+    height: 60px;
+    z-index: 9999; /* S'assurer que l'élément est au-dessus de tout le reste */
+}
+
+
+        /* Le cercle principal */
+        .circle {
+            display: block;
+            position: relative;
+            padding: 0;
+            margin: 0 auto;
+            border-radius: 50%;
+            height: 60px;
+            width: 60px;
+            background-color: #141414; /* Couleur transparente */
+            border: 2px solid var(--black); /* Ajout d'une bordure noire pour visibilité */
+            transition: 0.2s;
+            text-align: center;
+            box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.3);
+        }
+
+        .circle:active {
+            transform: scale(0.9);
+            box-shadow: 0 2px 15px 0 rgba(0, 0, 0, 0.3);
+        }
+
+        .circle:hover {
+            cursor: pointer;
+            background-color: rgba(0, 0, 0, 0.1); /* Fond léger au survol */
+            box-shadow: 0 8px 15px 0 rgba(0, 0, 0, 0.3);
+        }
+
+        /* SVG dans le cercle */
+        .circle .svg {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-left: -15px;
+            margin-top: -15px;
+            width: 30px;
+            height: 30px;
+            transition: 0.5s;
+            transform: rotate(180deg);
+        }
+
+        /* Les boutons supplémentaires */
+        .sub-circle {
+            z-index: 0;
+            position: absolute;
+            height: 40px;
+            width: 40px;
+            overflow: hidden;
+            border-radius: 50%;
+            transition: 0.3s;
+            transform: scale(0.5);
+            opacity: 0;
+            padding: 0;
+            margin: 0;
+            box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.3);
+            border: none;
+        }
+
+        .sub-circle label {
+            background-color: var(--eer-black);
+            display: block;
+            color: var(--eer-black);
+            width: 100%;
+            height: 100%;
+            line-height: 40px;
+            transition: .5s;
+        }
+
+        .sub-circle label:hover {
+            cursor: pointer;
+            background-color: var(--eer-black);
+        }
+
+        /* Container des sous-boutons */
+        .subs {
+            left: -20px;
+            top: -50px;
+            width: 40px;
+            height: 40px;
+            text-align: center;
+            z-index: 0;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .hidden-sub-trigger {
+            display: none;
+        }
+
+        .hidden-sub-trigger:checked ~ label {
+            background-color: var(--black);
+        }
+
+        /* Masquer le trigger du bouton principal */
+        .hidden-trigger {
+            display: none;
+        }
+
+        .hidden-trigger:checked ~ .circle {
+            transform: scale(0.9);
+            cursor: pointer;
+            background-color: var(--black);
+            box-shadow: 0 8px 15px 0 rgba(0, 0, 0, 0.1);
+        }
+
+        .hidden-trigger:checked ~ .circle .svg {
+            transform: rotate(45deg);
+        }
+
+        /* Animation des sous-boutons */
+        .hidden-trigger:checked ~ .subs button:nth-of-type(1) {
+            transform: translate(0px, -100px) scale(1);
+            opacity: 1;
+            transition: 0.1s;
+        }
+
+        .hidden-trigger:checked ~ .subs button:nth-of-type(2) {
+            transform: translate(75px, -75px) scale(1);
+            opacity: 1;
+            transition: 0.2s;
+        }
+
+        .hidden-trigger:checked ~ .subs button:nth-of-type(3) {
+            transform: translate(100px, 0px) scale(1);
+            opacity: 1;
+            transition: 0.3s;
+        }
+
+        .hidden-trigger:checked ~ .subs button:nth-of-type(4) {
+            transform: translate(75px, 75px) scale(1);
+            opacity: 1;
+            transition: 0.4s;
+        }
+
+        .hidden-trigger:checked ~ .subs button:nth-of-type(5) {
+            transform: translate(0px, 100px) scale(1);
+            opacity: 1;
+            transition: 0.5s;
+        }
+
+        .hidden-trigger:checked ~ .subs button:nth-of-type(6) {
+            transform: translate(-75px, 75px) scale(1);
+            opacity: 1;
+            transition: 0.6s;
+        }
+
+        .hidden-trigger:checked ~ .subs button:nth-of-type(7) {
+            transform: translate(-100px, 0px) scale(1);
+            opacity: 1;
+            transition: 0.7s;
+        }
+
+        .hidden-trigger:checked ~ .subs button:nth-of-type(8) {
+            transform: translate(-75px, -75px) scale(1);
+            opacity: 1;
+            transition: 0.8s;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="wrapper">
+        <input type="checkbox" id="toogle" class="hidden-trigger">
+        <label for="toogle" class="circle">
+            <svg class="svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="48" height="48" xml:space="preserve" version="1.1" viewBox="0 0 48 48">
+                <image width="48" height="48" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAQAAAD9CzEMAAAAbElEQVR4Ae3XwQnFQAiE4eVVsGAP1mkPFjwvQvYSWCQYCYGZv4Dv5MGB5ghcIiDQI+kCftCzNsAR8y5gYu2rwCBAgMBTgEC3rek2yQEtAZoDjso8AyaKexmIDJUZD40AAQIE0gwx449GgMC9/t0b7GTsa7J+AAAAAElFTkSuQmCC"></image>
+            </svg>
+        </label>
+        
+        <div class="subs">
+            <button class="sub-circle">
+                <input value="1" name="sub-circle" type="radio" id="sub1" class="hidden-sub-trigger">
+                <label for="sub1"></label>
+            </button>
+            <button class="sub-circle">
+                <input value="1" name="sub-circle" type="radio" id="sub2" class="hidden-sub-trigger">
+                <label for="sub2"></label>
+            </button>
+            <button class="sub-circle">
+                <input value="1" name="sub-circle" type="radio" id="sub3" class="hidden-sub-trigger">
+                <label for="sub3"></label>
+            </button>
+            <button class="sub-circle">
+                <input value="1" name="sub-circle" type="radio" id="sub4" class="hidden-sub-trigger">
+                <label for="sub4"></label>
+            </button>
+            <button class="sub-circle">
+                <input value="1" name="sub-circle" type="radio" id="sub5" class="hidden-sub-trigger">
+                <label for="sub5"></label>
+            </button>
+            <button class="sub-circle">
+                <input value="1" name="sub-circle" type="radio" id="sub6" class="hidden-sub-trigger">
+                <label for="sub6"></label>
+            </button>
+            <button class="sub-circle">
+                <input value="1" name="sub-circle" type="radio" id="sub7" class="hidden-sub-trigger">
+                <label for="sub7"></label>
+            </button>
+            <button class="sub-circle">
+                <input value="1" name="sub-circle" type="radio" id="sub8" class="hidden-sub-trigger">
+                <label for="sub8"></label>
+            </button>
+        </div>
+    </div>
+  
   <style>
         /* From Uiverse.io by vinodjangid07 */ 
         /* The switch - the box around the speaker */
@@ -256,7 +474,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background-color: rgb(39, 39, 39);
+            background-color: transparent;
             border-radius: 50%;
             cursor: pointer;
             transition-duration: .3s;
@@ -328,8 +546,8 @@
         /* Positionner le toggle switch à droite et centré verticalement */
         .toggle-container {
             position: fixed;
-            top: 20%;
-            right: 400px; /* Décalage du côté droit */
+            top: 65%;
+            right: 450px; /* Décalage du côté droit */
             transform: translateY(-50%); /* Centrer verticalement */
             z-index: 999; /* Pour être au-dessus des autres éléments */
         }
@@ -373,8 +591,6 @@
 
         <div class="movie-actions">
             <button class="btn-play">Lecture</button>
-            <button class="btn-secondary">+ Ma liste</button>
-            <button class="btn-secondary">⬇ Télécharger</button>
         </div>
 
         <div class="movie-details">
