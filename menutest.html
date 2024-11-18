@@ -1,647 +1,156 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Netflix Movie Page</title>
-    <style>
-        /* Global Styling */
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-            background-color: #0f0f0f;
-            color: white;
-        }
-
-        .movie-modal {
-            max-width: 1000px;
-            margin: 30px auto;
-            background: #141414;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.8);
-        }
-
-        /* Movie Header */
-        .movie-header {
-            position: relative;
-            height: 600px; /* Taille de l'image plus grande */
-            background: url('https://occ-0-4164-55.1.nflxso.net/dnm/api/v6/E8vDc_W8CLv7-yMQu8KMEC7Rrr8/AAAABfsKMLiYPqk57f2xOUvtRk7LM1uyaVvFGCMCiTZ9KRGOmzO-nw8lG_dtaGdEYhH_EF01J8DN29j-oD6LPzCaLYd0bpJsVcJGeiFK.webp?r=2d1') no-repeat center center/cover;
-            width: 100%;
-            overflow: hidden;
-            z-index: 1;
-        }
-
-        .movie-header::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4)); /* Dégradé transparent */
-            z-index: 2;
-        }
-
-        /* Movie Logo */
-        .movie-logo {
-            position: absolute;
-            bottom: 140px; /* Le logo est remonté */
-            left: 40px;
-            width: 425px;
-            z-index: 10;
-        }
-
-        /* Movie Video */
-        .movie-video {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: none;
-            z-index: 5;
-        }
-
-        /* Movie Actions (Buttons) */
-        .movie-actions {
-            position: absolute;
-            bottom: 30%; /* Positionnement des boutons sur l'image */
-            left: 450px;
-            display: flex;
-            gap: 20px;
-            z-index: 10;
-        }
-
-        .movie-actions button {
-            padding: 12px 25px;
-            font-size: 18px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: all 0.3s ease-in-out;
-        }
-
-        .btn-play {
-            background-color: #fff;
-            color: #000;
-            font-weight: bold;
-        }
-
-        .btn-play:hover {
-            background-color: #e6e6e6;
-        }
-
-        .btn-secondary {
-            background-color: rgba(255, 255, 255, 0.3);
-            color: #fff;
-        }
-
-        .btn-secondary:hover {
-            background-color: rgba(255, 255, 255, 0.5);
-        }
-
-        /* Blur effect below the image */
-        .movie-header .blur-effect {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            width: 100%;
-            height: 40px;
-            background: rgba(0, 0, 0, 0.6);
-            filter: blur(8px);
-            z-index: 3;
-        }
-
-        /* Movie Details */
-        .movie-details {
-            padding: 20px 40px;
-        }
-
-        .movie-info {
-            margin-bottom: 20px;
-            font-size: 16px;
-            color: #bbb;
-        }
-
-        .movie-description {
-            margin: 20px 0;
-            font-size: 22px;
-            line-height: 1.8;
-        }
-
-        .movie-meta {
-            font-size: 16px;
-            color: #888;
-        }
-
-        .movie-meta span {
-            display: block;
-            margin-top: 8px;
-        }
-
-        /* Titles Section */
-        .titles-section {
-            margin-top: 40px;
-        }
-
-        .titles-section h2 {
-            margin-left: 40px;
-            margin-bottom: 20px;
-            font-size: 24px;
-            font-weight: bold;
-        }
-
-        /* Images above the films */
-        .section-images {
-            display: flex;
-            gap: 15px;
-            margin: 0 40px 20px;
-            overflow-x: auto;
-        }
-
-        .section-images img {
-            width: 100%;
-            height: 150px;
-            object-fit: cover;
-            border-radius: 8px;
-        }
-
-        /* Titles Grid */
-        .titles-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            padding: 0 40px 40px;
-        }
-
-        .title-card {
-            background: #1f1f1f;
-            border-radius: 10px;
-            overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .title-card:hover {
-            transform: scale(1.08);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.8);
-        }
-
-        .title-card img {
-            width: 50%;
-            height: auto;
-            display: block;
-        }
-
-        .title-details {
-            padding: 15px;
-        }
-
-        .title-info {
-            font-size: 14px;
-            color: #bbb;
-            margin-bottom: 15px;
-        }
-
-        .title-description {
-            font-size: 14px;
-            color: #aaa;
-            line-height: 1.6;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .movie-logo {
-                width: 220px;
-            }
-
-            .movie-actions {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .movie-actions button {
-                width: 100%;
-                max-width: 300px;
-            }
-
-            .movie-details {
-                padding: 20px;
-            }
-
-            .movie-description {
-                font-size: 16px;
-            }
-
-            .titles-section h2 {
-                font-size: 20px;
-            }
-
-            .titles-grid {
-                padding: 0 20px;
-            }
-        }
-    </style>
-</head>
-<body>
-  
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mandalorian Header</title>
   <style>
-        /* Wrapper positionné pour être centré à droite */
-        .wrapper {
-    position: fixed;
-    top: 67%; /* Centré verticalement par rapport à la fenêtre */
-    right: 1090px; /* Placé à droite de l'écran */
-    transform: translateY(-50%); /* Pour s'assurer qu'il est parfaitement centré */
-    width: 60px;
-    height: 60px;
-    z-index: 9999; /* S'assurer que l'élément est au-dessus de tout le reste */
-}
+    /* Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
+    body {
+      background: #2c2c2c;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
 
-        /* Le cercle principal */
-        .circle {
-            display: block;
-            position: fixed;
-            padding: 0;
-            margin: 0 auto;
-            border-radius: 50%;
-            height: 60px;
-            width: 60px;
-background-color: rgba(20, 20, 20, 0.5); /* Fond transparent avec une couleur légèrement sombre */
-    backdrop-filter: blur(10px); /* Applique l'effet de flou */            border: 2px solid var(--black); /* Ajout d'une bordure noire pour visibilité */
-            transition: 0.2s;
-            text-align: center;
-            box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.3);
-        }
+    .header-container {
+      position: relative;
+      width: 100%;
+      max-width: 400px;
+      border-radius: 15px;
+      overflow: hidden;
+      background: #000;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    }
 
-        .circle:active {
-            transform: scale(0.9);
-            box-shadow: 0 2px 15px 0 rgba(0, 0, 0, 0.3);
-        }
+    .header-container img {
+      width: 100%;
+      height: auto;
+    }
 
-        .circle:hover {
-            cursor: pointer;
-            background-color: rgba(0, 0, 0, 0.1); /* Fond léger au survol */
-            box-shadow: 0 8px 15px 0 rgba(0, 0, 0, 0.3);
-        }
+    .close-btn {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: rgba(0, 0, 0, 0.6);
+      color: #fff;
+      border: none;
+      font-size: 20px;
+      width: 30px;
+      height: 30px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+      cursor: pointer;
+    }
 
-        /* SVG dans le cercle */
-        .circle .svg {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            margin-left: -15px;
-            margin-top: -15px;
-            width: 30px;
-            height: 30px;
-            transition: 0.5s;
-            transform: rotate(180deg);
-        }
+    .title-container {
+      position: absolute;
+      bottom: 60px;
+      left: 20px;
+      z-index: 2;
+    }
 
-        /* Les boutons supplémentaires */
-        .sub-circle {
-            z-index: 0;
-            position: absolute;
-            height: 40px;
-            width: 40px;
-            overflow: hidden;
-            border-radius: 50%;
-            transition: 0.3s;
-            transform: scale(0.5);
-            opacity: 0;
-            padding: 0;
-            margin: 0;
-            box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.3);
-            border: none;
-        }
+    .title-container h1 {
+      font-size: 2rem;
+      font-weight: bold;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+    }
 
-        .sub-circle label {
-            background-color: var(--eer-black);
-            display: block;
-            color: var(--eer-black);
-            width: 100%;
-            height: 100%;
-            line-height: 40px;
-            transition: .5s;
-        }
+    .action-buttons {
+      position: absolute;
+      bottom: 15px;
+      left: 20px;
+      right: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
 
-        .sub-circle label:hover {
-            cursor: pointer;
-            background-color: var(--eer-black);
-        }
+    .action-buttons button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 20px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+    }
 
-        /* Container des sous-boutons */
-        .subs {
-            left: -20px;
-            top: -50px;
-            width: 40px;
-            height: 40px;
-            text-align: center;
-            z-index: 0;
-            margin: 0 auto;
-            position: relative;
-        }
+    .btn-resume {
+      background: #fff;
+      color: #000;
+      display: flex;
+      gap: 10px;
+    }
 
-        .hidden-sub-trigger {
-            display: none;
-        }
+    .btn-add {
+      background: rgba(255, 255, 255, 0.2);
+      color: #fff;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
 
-        .hidden-sub-trigger:checked ~ label {
-            background-color: var(--black);
-        }
+    .btn-more {
+      background: rgba(255, 255, 255, 0.2);
+      color: #fff;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
 
-        /* Masquer le trigger du bouton principal */
-        .hidden-trigger {
-            display: none;
-        }
-
-        .hidden-trigger:checked ~ .circle {
-            transform: scale(0.9);
-            cursor: pointer;
-            background-color: var(--black);
-            box-shadow: 0 8px 15px 0 rgba(0, 0, 0, 0.1);
-        }
-
-        .hidden-trigger:checked ~ .circle .svg {
-            transform: rotate(45deg);
-        }
-
-        /* Animation des sous-boutons */
-        .hidden-trigger:checked ~ .subs button:nth-of-type(1) {
-            transform: translate(0px, -100px) scale(1);
-            opacity: 1;
-            transition: 0.1s;
-        }
-
-        .hidden-trigger:checked ~ .subs button:nth-of-type(2) {
-            transform: translate(75px, -75px) scale(1);
-            opacity: 1;
-            transition: 0.2s;
-        }
-
-        .hidden-trigger:checked ~ .subs button:nth-of-type(3) {
-            transform: translate(100px, 0px) scale(1);
-            opacity: 1;
-            transition: 0.3s;
-        }
-
-        .hidden-trigger:checked ~ .subs button:nth-of-type(4) {
-            transform: translate(75px, 75px) scale(1);
-            opacity: 1;
-            transition: 0.4s;
-        }
-
-        .hidden-trigger:checked ~ .subs button:nth-of-type(5) {
-            transform: translate(0px, 100px) scale(1);
-            opacity: 1;
-            transition: 0.5s;
-        }
-
-        .hidden-trigger:checked ~ .subs button:nth-of-type(6) {
-            transform: translate(-75px, 75px) scale(1);
-            opacity: 1;
-            transition: 0.6s;
-        }
-
-        .hidden-trigger:checked ~ .subs button:nth-of-type(7) {
-            transform: translate(-100px, 0px) scale(1);
-            opacity: 1;
-            transition: 0.7s;
-        }
-
-        .hidden-trigger:checked ~ .subs button:nth-of-type(8) {
-            transform: translate(-75px, -75px) scale(1);
-            opacity: 1;
-            transition: 0.8s;
-        }
-    </style>
+    .details {
+      text-align: center;
+      padding: 15px;
+      font-size: 0.9rem;
+      color: #aaa;
+    }
+  </style>
 </head>
 <body>
+  <div class="header-container">
+    <!-- Image -->
+    <img src="https://occ-0-4164-55.1.nflxso.net/dnm/api/v6/E8vDc_W8CLv7-yMQu8KMEC7Rrr8/AAAABawkmfaVNmUFgTWNZ0AVcJUjHXxikVEpF9g6vNeKjuCpCjE_lpdCu5OMu7mDH2sxLL6x4cfIHkRtZEkFN3uRwYbvAO-jBLzGkeOA.webp?r=29e" alt="Mandalorian">
 
-    <div class="wrapper">
-        <input type="checkbox" id="toogle" class="hidden-trigger">
-        <label for="toogle" class="circle">
-            <svg class="svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="48" height="48" xml:space="preserve" version="1.1" viewBox="0 0 48 48">
-                <image width="48" height="48" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAQAAAD9CzEMAAAAbElEQVR4Ae3XwQnFQAiE4eVVsGAP1mkPFjwvQvYSWCQYCYGZv4Dv5MGB5ghcIiDQI+kCftCzNsAR8y5gYu2rwCBAgMBTgEC3rek2yQEtAZoDjso8AyaKexmIDJUZD40AAQIE0gwx449GgMC9/t0b7GTsa7J+AAAAAElFTkSuQmCC"></image>
-            </svg>
-        </label>
-        
-        <div class="subs">
-            <button class="sub-circle">
-                <input value="1" name="sub-circle" type="radio" id="sub1" class="hidden-sub-trigger">
-                <label for="sub1"></label>
-            </button>
-            <button class="sub-circle">
-                <input value="1" name="sub-circle" type="radio" id="sub2" class="hidden-sub-trigger">
-                <label for="sub2"></label>
-            </button>
-            <button class="sub-circle">
-                <input value="1" name="sub-circle" type="radio" id="sub3" class="hidden-sub-trigger">
-                <label for="sub3"></label>
-            </button>
-            <button class="sub-circle">
-                <input value="1" name="sub-circle" type="radio" id="sub4" class="hidden-sub-trigger">
-                <label for="sub4"></label>
-            </button>
-            <button class="sub-circle">
-                <input value="1" name="sub-circle" type="radio" id="sub5" class="hidden-sub-trigger">
-                <label for="sub5"></label>
-            </button>
-            <button class="sub-circle">
-                <input value="1" name="sub-circle" type="radio" id="sub6" class="hidden-sub-trigger">
-                <label for="sub6"></label>
-            </button>
-            <button class="sub-circle">
-                <input value="1" name="sub-circle" type="radio" id="sub7" class="hidden-sub-trigger">
-                <label for="sub7"></label>
-            </button>
-            <button class="sub-circle">
-                <input value="1" name="sub-circle" type="radio" id="sub8" class="hidden-sub-trigger">
-                <label for="sub8"></label>
-            </button>
-        </div>
-    </div>
-  
-  <style>
-        /* From Uiverse.io by vinodjangid07 */ 
-        /* The switch - the box around the speaker */
-        .toggleSwitch {
-            width: 50px;
-            height: 50px;
-            position: fixed;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: transparent;
-            border-radius: 50%;
-            cursor: pointer;
-            transition-duration: .3s;
-            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.13);
-            overflow: hidden;
-        }
+    <!-- Close Button -->
+    <button class="close-btn">×</button>
 
-        /* Hide default HTML checkbox */
-        #checkboxInput {
-            display: none;
-        }
-
-        .bell {
-            width: 18px;
-        }
-
-        .bell path {
-            fill: white;
-        }
-
-        .speaker {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 2;
-            transition-duration: .3s;
-        }
-
-        .speaker svg {
-            width: 18px;
-        }
-
-        .mute-speaker {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            z-index: 3;
-            transition-duration: .3s;
-        }
-
-        .mute-speaker svg {
-            width: 18px;
-        }
-
-        #checkboxInput:checked + .toggleSwitch .speaker {
-            opacity: 0;
-            transition-duration: .3s;
-        }
-
-        #checkboxInput:checked + .toggleSwitch .mute-speaker {
-            opacity: 1;
-            transition-duration: .3s;
-        }
-
-        #checkboxInput:active + .toggleSwitch {
-            transform: scale(0.7);
-        }
-
-        #checkboxInput:hover + .toggleSwitch {
-            background-color: rgb(61, 61, 61);
-        }
-
-        /* Positionner le toggle switch à droite et centré verticalement */
-        .toggle-container {
-            position: fixed;
-            top: 67%;
-            right: 450px; /* Décalage du côté droit */
-            transform: translateY(-50%); /* Centrer verticalement */
-            z-index: 999; /* Pour être au-dessus des autres éléments */
-        }
-    </style>
-</head>
-<body>
-
-    <!-- Conteneur pour le toggle switch, positionné à droite -->
-    <div class="toggle-container">
-        <input type="checkbox" id="checkboxInput">
-        <label for="checkboxInput" class="toggleSwitch">
-            <div class="speaker">
-                <svg xmlns="http://www.w3.org/2000/svg" version="1.0" viewBox="0 0 75 75">
-                    <path d="M39.389,13.769 L22.235,28.606 L6,28.606 L6,47.699 L21.989,47.699 L39.389,62.75 L39.389,13.769z" style="stroke:#fff;stroke-width:5;stroke-linejoin:round;fill:#fff;"></path>
-                    <path d="M48,27.6a19.5,19.5 0 0 1 0,21.4M55.1,20.5a30,30 0 0 1 0,35.6M61.6,14a38.8,38.8 0 0 1 0,48.6" style="fill:none;stroke:#fff;stroke-width:5;stroke-linecap:round"></path>
-                </svg>
-            </div>
-
-            <div class="mute-speaker">
-                <svg version="1.0" viewBox="0 0 75 75" stroke="#fff" stroke-width="5">
-                    <path d="m39,14-17,15H6V48H22l17,15z" fill="#fff" stroke-linejoin="round"></path>
-                    <path d="m49,26 20,24m0-24-20,24" fill="#fff" stroke-linecap="round"></path>
-                </svg>
-            </div>
-        </label>
+    <!-- Title -->
+    <div class="title-container">
+      <h1>The Mandalorian</h1>
     </div>
 
-    <div class="movie-modal">
-        <div class="movie-header">
-            <!-- Movie Logo -->
-            <img src="https://occ-0-4164-55.1.nflxso.net/dnm/api/v6/tx1O544a9T7n8Z_G12qaboulQQE/AAAABUaqEdvBz4ldEANhaXztqO7JGiMWmULTaTNP8fmKikg3WR0MGO5Rv6r95OiF5_ELZf0ub9yF_Yks9Zh4GbQF80h2N4QRUbfyDwJRV5R7eV4.webp?r=2ae" alt="Movie Logo" class="movie-logo">
-            <!-- Blur Effect Below Image -->
-            <div class="blur-effect"></div>
-        </div>
-
-        <!-- Video element -->
-        <video class="movie-video" id="movie-video" autoplay muted>
-            <source src="path-to-video.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-
-        <div class="movie-actions">
-            <button class="btn-play">Lecture</button>
-        </div>
-
-        <div class="movie-details">
-            <div class="movie-info">
-                <span>2023 • 1h 32min • HD</span>
-                <span>7+ • Violence légère, peur</span>
-            </div>
-            <div class="movie-description">
-                "Tant qu'on est tous les deux, il ne peut rien nous arriver." Mario voyage dans les confins de l'univers pour sauver son frère Luigi des griffes de Bowser.
-            </div>
-            <div class="movie-meta">
-                <span>Genres: Animation, Aventure, Famille</span>
-                <span>Réalisé par: John Doe</span>
-            </div>
-        </div>
-
-        <div class="titles-section">
-            <h2>Films Similaires</h2>
-            <div class="section-images">
-                <img src="image1.jpg" alt="Movie 1">
-                <img src="image2.jpg" alt="Movie 2">
-                <img src="image3.jpg" alt="Movie 3">
-            </div>
-
-            <div class="titles-grid">
-                <div class="title-card">
-                    <img src="" alt="Tom & Jerry">
-                    <div class="title-details">
-                        <div class="title-info">7+ • HD • 2021 • 1h 41min</div>
-                        <div class="title-description">Les célèbres personnages de dessin animé se bagarrent dans un hôtel de New York.</div>
-                    </div>
-                </div>
-                <div class="title-card">
-                    <img src="path-to-sonic.jpg" alt="Sonic">
-                    <div class="title-details">
-                        <div class="title-info">7+ • HD • 2020 • 1h 42min</div>
-                        <div class="title-description">Un hérisson effronté se retrouve sur Terre et fait équipe avec un shérif pour récupérer ses anneaux.</div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <!-- Action Buttons -->
+    <div class="action-buttons">
+      <button class="btn-resume">
+        <span>&#9658;</span> Resume
+      </button>
+      <button class="btn-add">+</button>
+      <button class="btn-more">•••</button>
     </div>
 
-    <script>
-        window.onload = function() {
-            setTimeout(function() {
-                const video = document.getElementById('movie-video');
-                video.style.display = 'block';
-                video.style.opacity = '1';
-            }, 2000);
-        };
-    </script>
+    <!-- Details -->
+    <div class="details">2019 · 2 Seasons · PG-13 · CC · 4K</div>
+  </div>
 </body>
 </html>
