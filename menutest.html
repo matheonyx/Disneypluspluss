@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Details Page</title>
+  <title>Netflix-Like Menu</title>
   <style>
     /* Reset */
     * {
@@ -13,100 +13,100 @@
     }
 
     body {
-      background: #2c2c2c;
+      background-color: #141414;
       color: #fff;
       font-family: Arial, sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 20px;
+      overflow-x: hidden;
     }
 
     .container {
-      width: 100%;
-      max-width: 400px;
-      background: #1a1a1a;
-      border-radius: 15px;
-      overflow: hidden;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+      max-width: 900px;
+      margin: 0 auto;
     }
 
     /* Header Section */
-    .header-container img {
-      width: 100%;
-    }
-
-    .close-btn {
-      position: absolute;
-      top: 15px;
-      right: 15px;
-      background: rgba(0, 0, 0, 0.6);
-      color: #fff;
-      border: none;
-      font-size: 20px;
-      width: 30px;
-      height: 30px;
+    .header {
+      position: relative;
+      height: 70vh;
+      background: url("https://occ-0-4164-55.1.nflxso.net/dnm/api/v6/E8vDc_W8CLv7-yMQu8KMEC7Rrr8/AAAABawkmfaVNmUFgTWNZ0AVcJUjHXxikVEpF9g6vNeKjuCpCjE_lpdCu5OMu7mDH2sxLL6x4cfIHkRtZEkFN3uRwYbvAO-jBLzGkeOA.webp?r=29e") no-repeat center center/cover;
       display: flex;
+      align-items: flex-end;
       justify-content: center;
-      align-items: center;
-      border-radius: 50%;
-      cursor: pointer;
+      color: white;
+      overflow: hidden;
     }
 
-    .title-container h1 {
-      font-size: 2rem;
-      font-weight: bold;
-      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+    .header-gradient {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 40%;
+      background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.7), #141414);
+    }
+
+    .header-content {
+      position: relative;
+      text-align: center;
+      z-index: 2;
+      padding: 20px;
+    }
+
+    .header-content img {
+      max-width: 300px;
+      margin-bottom: 20px;
     }
 
     .action-buttons {
       display: flex;
-      justify-content: space-between;
-      padding: 10px 20px;
+      gap: 15px;
+      justify-content: center;
+      margin-top: 15px;
     }
 
     .action-buttons button {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 10px;
+      background: rgba(255, 255, 255, 0.8);
+      color: #000;
+      font-weight: bold;
+      padding: 10px 20px;
       border: none;
       border-radius: 20px;
-      font-size: 1rem;
-      font-weight: bold;
       cursor: pointer;
+      font-size: 1rem;
+    }
+
+    .action-buttons button:hover {
+      background: #fff;
     }
 
     .details {
-      text-align: center;
-      padding: 10px;
       font-size: 0.9rem;
       color: #aaa;
+      margin-top: 10px;
     }
 
-    /* Episode List Section */
-    .episodes {
+    /* Section Headers */
+    .section {
       padding: 20px;
-      background: #121212;
     }
 
-    .episodes h2 {
-      font-size: 1.2rem;
-      margin-bottom: 10px;
-    }
-
-    .episode {
-      display: flex;
-      gap: 10px;
+    .section h2 {
+      font-size: 1.5rem;
       margin-bottom: 15px;
-      align-items: center;
     }
 
-    .episode img {
-      width: 100px;
-      height: 70px;
-      border-radius: 5px;
+    /* Episodes Section */
+    .episodes .episode {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .episodes img {
+      width: 150px;
+      height: 90px;
       object-fit: cover;
+      border-radius: 5px;
     }
 
     .episode-details {
@@ -119,94 +119,65 @@
     }
 
     .episode-details p {
-      font-size: 0.8rem;
-      color: #aaa;
-    }
-
-    /* Trailers and Info Section */
-    .trailers {
-      padding: 20px;
-      background: #1a1a1a;
-    }
-
-    .trailers h2 {
-      font-size: 1.2rem;
-      margin-bottom: 10px;
-    }
-
-    .trailer-content {
-      display: flex;
-      gap: 10px;
-    }
-
-    .trailer-content img {
-      width: 100px;
-      height: 70px;
-      border-radius: 5px;
-      object-fit: cover;
-    }
-
-    .info {
-      flex: 1;
-    }
-
-    .info p {
       font-size: 0.9rem;
       color: #aaa;
     }
 
+    /* Trailers Section */
+    .trailers .trailer-content {
+      display: flex;
+      gap: 15px;
+    }
+
+    .trailers img {
+      width: 150px;
+      height: 90px;
+      border-radius: 5px;
+      object-fit: cover;
+    }
+
     /* Recommendations Section */
-    .recommendations {
-      padding: 20px;
-      background: #121212;
-    }
-
-    .recommendations h2 {
-      font-size: 1.2rem;
-      margin-bottom: 10px;
-    }
-
     .recommendations-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 10px;
     }
 
-    .recommendations-grid img {
+    .recommendations img {
       width: 100%;
-      border-radius: 10px;
-      object-fit: cover;
+      height: auto;
+      border-radius: 5px;
     }
   </style>
 </head>
 <body>
   <div class="container">
     <!-- Header Section -->
-    <div class="header-container">
-      <img src="https://via.placeholder.com/400x300" alt="Mandalorian">
-      <div class="title-container">
-        <h1>The Mandalorian</h1>
+    <div class="header">
+      <div class="header-gradient"></div>
+      <div class="header-content">
+        <img src="https://via.placeholder.com/300x80?text=The+Mandalorian" alt="The Mandalorian Logo">
+        <div class="action-buttons">
+          <button>Resume</button>
+          <button>+</button>
+          <button>More</button>
+        </div>
+        <div class="details">2019 · 2 Seasons · PG-13 · 4K</div>
       </div>
-      <div class="action-buttons">
-        <button class="btn-resume">Resume</button>
-        <button class="btn-add">+</button>
-        <button class="btn-more">...</button>
-      </div>
-      <div class="details">2019 · 2 Seasons · PG-13 · CC · 4K</div>
     </div>
 
     <!-- Episodes Section -->
-    <div class="episodes">
+    <div class="section episodes">
       <h2>Episodes</h2>
       <div class="episode">
-        <img src="https://via.placeholder.com/100x70" alt="Episode 1">
+        <img src="https://via.placeholder.com/150x90" alt="Episode 1">
         <div class="episode-details">
           <h3>Episode 1: The Child</h3>
           <p>38m · A bounty hunter protects a valuable target.</p>
         </div>
       </div>
       <div class="episode">
-        <img src="https://via.placeholder.com/100x70" alt="Episode 2">
+        <img src="https://via.placeholder.com/150x90" alt="Episode 2">
         <div class="episode-details">
           <h3>Episode 2: The Clan</h3>
           <p>35m · Secrets are revealed.</p>
@@ -214,12 +185,12 @@
       </div>
     </div>
 
-    <!-- Trailers and Info Section -->
-    <div class="trailers">
+    <!-- Trailers Section -->
+    <div class="section trailers">
       <h2>Trailers & Info</h2>
       <div class="trailer-content">
-        <img src="https://via.placeholder.com/100x70" alt="Trailer">
-        <div class="info">
+        <img src="https://via.placeholder.com/150x90" alt="Trailer">
+        <div>
           <p>Director: Jon Favreau</p>
           <p>Starring: Pedro Pascal, Gina Carano</p>
           <p>Rating: PG-13</p>
@@ -228,13 +199,13 @@
     </div>
 
     <!-- Recommendations Section -->
-    <div class="recommendations">
+    <div class="section recommendations">
       <h2>More Like This</h2>
       <div class="recommendations-grid">
-        <img src="https://via.placeholder.com/100x150" alt="Recommendation 1">
-        <img src="https://via.placeholder.com/100x150" alt="Recommendation 2">
-        <img src="https://via.placeholder.com/100x150" alt="Recommendation 3">
-        <img src="https://via.placeholder.com/100x150" alt="Recommendation 4">
+        <img src="https://via.placeholder.com/150x225" alt="Recommendation 1">
+        <img src="https://via.placeholder.com/150x225" alt="Recommendation 2">
+        <img src="https://via.placeholder.com/150x225" alt="Recommendation 3">
+        <img src="https://via.placeholder.com/150x225" alt="Recommendation 4">
       </div>
     </div>
   </div>
