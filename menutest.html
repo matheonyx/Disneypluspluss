@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mandalorian Header</title>
+  <title>Details Page</title>
   <style>
     /* Reset */
     * {
@@ -17,25 +17,23 @@
       color: #fff;
       font-family: Arial, sans-serif;
       display: flex;
-      justify-content: center;
+      flex-direction: column;
       align-items: center;
-      min-height: 100vh;
       padding: 20px;
     }
 
-    .header-container {
-      position: relative;
+    .container {
       width: 100%;
       max-width: 400px;
+      background: #1a1a1a;
       border-radius: 15px;
       overflow: hidden;
-      background: #000;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
     }
 
+    /* Header Section */
     .header-container img {
       width: 100%;
-      height: auto;
     }
 
     .close-btn {
@@ -55,13 +53,6 @@
       cursor: pointer;
     }
 
-    .title-container {
-      position: absolute;
-      bottom: 60px;
-      left: 20px;
-      z-index: 2;
-    }
-
     .title-container h1 {
       font-size: 2rem;
       font-weight: bold;
@@ -69,20 +60,16 @@
     }
 
     .action-buttons {
-      position: absolute;
-      bottom: 15px;
-      left: 20px;
-      right: 20px;
       display: flex;
-      align-items: center;
       justify-content: space-between;
+      padding: 10px 20px;
     }
 
     .action-buttons button {
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 10px 20px;
+      padding: 10px;
       border: none;
       border-radius: 20px;
       font-size: 1rem;
@@ -90,67 +77,166 @@
       cursor: pointer;
     }
 
-    .btn-resume {
-      background: #fff;
-      color: #000;
+    .details {
+      text-align: center;
+      padding: 10px;
+      font-size: 0.9rem;
+      color: #aaa;
+    }
+
+    /* Episode List Section */
+    .episodes {
+      padding: 20px;
+      background: #121212;
+    }
+
+    .episodes h2 {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+    }
+
+    .episode {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 15px;
+      align-items: center;
+    }
+
+    .episode img {
+      width: 100px;
+      height: 70px;
+      border-radius: 5px;
+      object-fit: cover;
+    }
+
+    .episode-details {
+      flex: 1;
+    }
+
+    .episode-details h3 {
+      font-size: 1rem;
+      margin-bottom: 5px;
+    }
+
+    .episode-details p {
+      font-size: 0.8rem;
+      color: #aaa;
+    }
+
+    /* Trailers and Info Section */
+    .trailers {
+      padding: 20px;
+      background: #1a1a1a;
+    }
+
+    .trailers h2 {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+    }
+
+    .trailer-content {
       display: flex;
       gap: 10px;
     }
 
-    .btn-add {
-      background: rgba(255, 255, 255, 0.2);
-      color: #fff;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+    .trailer-content img {
+      width: 100px;
+      height: 70px;
+      border-radius: 5px;
+      object-fit: cover;
     }
 
-    .btn-more {
-      background: rgba(255, 255, 255, 0.2);
-      color: #fff;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+    .info {
+      flex: 1;
     }
 
-    .details {
-      text-align: center;
-      padding: 15px;
+    .info p {
       font-size: 0.9rem;
       color: #aaa;
+    }
+
+    /* Recommendations Section */
+    .recommendations {
+      padding: 20px;
+      background: #121212;
+    }
+
+    .recommendations h2 {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+    }
+
+    .recommendations-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    .recommendations-grid img {
+      width: 100%;
+      border-radius: 10px;
+      object-fit: cover;
     }
   </style>
 </head>
 <body>
-  <div class="header-container">
-    <!-- Image -->
-    <img src="https://occ-0-4164-55.1.nflxso.net/dnm/api/v6/E8vDc_W8CLv7-yMQu8KMEC7Rrr8/AAAABawkmfaVNmUFgTWNZ0AVcJUjHXxikVEpF9g6vNeKjuCpCjE_lpdCu5OMu7mDH2sxLL6x4cfIHkRtZEkFN3uRwYbvAO-jBLzGkeOA.webp?r=29e" alt="Mandalorian">
-
-    <!-- Close Button -->
-    <button class="close-btn">×</button>
-
-    <!-- Title -->
-    <div class="title-container">
-      <h1>The Mandalorian</h1>
+  <div class="container">
+    <!-- Header Section -->
+    <div class="header-container">
+      <img src="https://via.placeholder.com/400x300" alt="Mandalorian">
+      <div class="title-container">
+        <h1>The Mandalorian</h1>
+      </div>
+      <div class="action-buttons">
+        <button class="btn-resume">Resume</button>
+        <button class="btn-add">+</button>
+        <button class="btn-more">...</button>
+      </div>
+      <div class="details">2019 · 2 Seasons · PG-13 · CC · 4K</div>
     </div>
 
-    <!-- Action Buttons -->
-    <div class="action-buttons">
-      <button class="btn-resume">
-        <span>&#9658;</span> Resume
-      </button>
-      <button class="btn-add">+</button>
-      <button class="btn-more">•••</button>
+    <!-- Episodes Section -->
+    <div class="episodes">
+      <h2>Episodes</h2>
+      <div class="episode">
+        <img src="https://via.placeholder.com/100x70" alt="Episode 1">
+        <div class="episode-details">
+          <h3>Episode 1: The Child</h3>
+          <p>38m · A bounty hunter protects a valuable target.</p>
+        </div>
+      </div>
+      <div class="episode">
+        <img src="https://via.placeholder.com/100x70" alt="Episode 2">
+        <div class="episode-details">
+          <h3>Episode 2: The Clan</h3>
+          <p>35m · Secrets are revealed.</p>
+        </div>
+      </div>
     </div>
 
-    <!-- Details -->
-    <div class="details">2019 · 2 Seasons · PG-13 · CC · 4K</div>
+    <!-- Trailers and Info Section -->
+    <div class="trailers">
+      <h2>Trailers & Info</h2>
+      <div class="trailer-content">
+        <img src="https://via.placeholder.com/100x70" alt="Trailer">
+        <div class="info">
+          <p>Director: Jon Favreau</p>
+          <p>Starring: Pedro Pascal, Gina Carano</p>
+          <p>Rating: PG-13</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Recommendations Section -->
+    <div class="recommendations">
+      <h2>More Like This</h2>
+      <div class="recommendations-grid">
+        <img src="https://via.placeholder.com/100x150" alt="Recommendation 1">
+        <img src="https://via.placeholder.com/100x150" alt="Recommendation 2">
+        <img src="https://via.placeholder.com/100x150" alt="Recommendation 3">
+        <img src="https://via.placeholder.com/100x150" alt="Recommendation 4">
+      </div>
+    </div>
   </div>
 </body>
 </html>
