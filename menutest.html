@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Netflix-Like Menu</title>
+  <title>Enhanced Details Page</title>
   <style>
     /* Reset */
     * {
@@ -15,169 +15,187 @@
     body {
       background-color: #141414;
       color: #fff;
-      font-family: Arial, sans-serif;
+      font-family: 'Arial', sans-serif;
+      padding: 20px;
       overflow-x: hidden;
     }
 
     .container {
-      max-width: 900px;
+      max-width: 1200px;
       margin: 0 auto;
-    }
-
-    /* Header Section */
-    .header {
-      position: relative;
-      height: 70vh;
-      background: url("https://occ-0-4164-55.1.nflxso.net/dnm/api/v6/E8vDc_W8CLv7-yMQu8KMEC7Rrr8/AAAABawkmfaVNmUFgTWNZ0AVcJUjHXxikVEpF9g6vNeKjuCpCjE_lpdCu5OMu7mDH2sxLL6x4cfIHkRtZEkFN3uRwYbvAO-jBLzGkeOA.webp?r=29e") no-repeat center center/cover;
-      display: flex;
-      align-items: flex-end;
-      justify-content: center;
-      color: white;
-      overflow: hidden;
-    }
-
-    .header-gradient {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 40%;
-      background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.7), #141414);
-    }
-
-    .header-content {
-      position: relative;
-      text-align: center;
-      z-index: 2;
       padding: 20px;
-    }
-
-    .header-content img {
-      max-width: 300px;
-      margin-bottom: 20px;
-    }
-
-    .action-buttons {
-      display: flex;
-      gap: 15px;
-      justify-content: center;
-      margin-top: 15px;
-    }
-
-    .action-buttons button {
-      background: rgba(255, 255, 255, 0.8);
-      color: #000;
-      font-weight: bold;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 20px;
-      cursor: pointer;
-      font-size: 1rem;
-    }
-
-    .action-buttons button:hover {
-      background: #fff;
-    }
-
-    .details {
-      font-size: 0.9rem;
-      color: #aaa;
-      margin-top: 10px;
     }
 
     /* Section Headers */
     .section {
-      padding: 20px;
+      padding: 30px 20px;
+      margin-bottom: 30px;
     }
 
     .section h2 {
-      font-size: 1.5rem;
-      margin-bottom: 15px;
+      font-size: 2rem;
+      margin-bottom: 20px;
+      border-left: 6px solid #e50914;
+      padding-left: 15px;
+      font-weight: 700;
     }
 
     /* Episodes Section */
     .episodes .episode {
       display: flex;
-      gap: 15px;
-      margin-bottom: 20px;
+      gap: 20px;
+      margin-bottom: 25px;
+      align-items: flex-start;
     }
 
     .episodes img {
-      width: 150px;
-      height: 90px;
+      width: 200px;
+      height: 120px;
       object-fit: cover;
-      border-radius: 5px;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
     }
 
     .episode-details {
       flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
 
     .episode-details h3 {
-      font-size: 1rem;
-      margin-bottom: 5px;
+      font-size: 1.2rem;
+      margin-bottom: 8px;
+      font-weight: 600;
     }
 
     .episode-details p {
-      font-size: 0.9rem;
-      color: #aaa;
+      font-size: 1rem;
+      color: #bbb;
     }
 
     /* Trailers Section */
     .trailers .trailer-content {
       display: flex;
-      gap: 15px;
+      gap: 20px;
+      margin-bottom: 30px;
     }
 
     .trailers img {
-      width: 150px;
-      height: 90px;
-      border-radius: 5px;
+      width: 200px;
+      height: 120px;
       object-fit: cover;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .trailer-info {
+      flex: 1;
+      padding-top: 10px;
+    }
+
+    .trailer-info p {
+      font-size: 1rem;
+      color: #bbb;
+      margin-bottom: 8px;
     }
 
     /* Recommendations Section */
-    .recommendations-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
+    .recommendations {
+      position: relative;
     }
 
-    .recommendations img {
-      width: 100%;
-      height: auto;
-      border-radius: 5px;
+    .recommendations-grid {
+      display: flex;
+      gap: 15px;
+      overflow-x: auto;
+      padding: 10px 0;
+      scroll-behavior: smooth;
+    }
+
+    .recommendations-grid img {
+      width: 150px;
+      height: 225px;
+      border-radius: 8px;
+      object-fit: cover;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .recommendations-grid img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.7);
+    }
+
+    /* Arrows for Recommendations Carousel */
+    .arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(0, 0, 0, 0.7);
+      color: #fff;
+      border: none;
+      font-size: 2rem;
+      cursor: pointer;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+      z-index: 10;
+    }
+
+    .arrow.left {
+      left: -15px;
+    }
+
+    .arrow.right {
+      right: -15px;
+    }
+
+    /* Hover effects on arrows */
+    .arrow:hover {
+      background-color: rgba(0, 0, 0, 0.9);
+    }
+
+    /* Media Queries for Larger Screens */
+    @media (min-width: 1200px) {
+      .container {
+        padding: 40px;
+      }
+
+      .section h2 {
+        font-size: 2.5rem;
+      }
+
+      .episodes img,
+      .trailers img {
+        width: 250px;
+        height: 150px;
+      }
+
+      .recommendations-grid img {
+        width: 180px;
+        height: 270px;
+      }
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <!-- Header Section -->
-    <div class="header">
-      <div class="header-gradient"></div>
-      <div class="header-content">
-        <img src="https://via.placeholder.com/300x80?text=The+Mandalorian" alt="The Mandalorian Logo">
-        <div class="action-buttons">
-          <button>Resume</button>
-          <button>+</button>
-          <button>More</button>
-        </div>
-        <div class="details">2019 · 2 Seasons · PG-13 · 4K</div>
-      </div>
-    </div>
-
     <!-- Episodes Section -->
     <div class="section episodes">
       <h2>Episodes</h2>
       <div class="episode">
-        <img src="https://via.placeholder.com/150x90" alt="Episode 1">
+        <img src="https://via.placeholder.com/250x150" alt="Episode 1">
         <div class="episode-details">
           <h3>Episode 1: The Child</h3>
           <p>38m · A bounty hunter protects a valuable target.</p>
         </div>
       </div>
       <div class="episode">
-        <img src="https://via.placeholder.com/150x90" alt="Episode 2">
+        <img src="https://via.placeholder.com/250x150" alt="Episode 2">
         <div class="episode-details">
           <h3>Episode 2: The Clan</h3>
           <p>35m · Secrets are revealed.</p>
@@ -189,11 +207,11 @@
     <div class="section trailers">
       <h2>Trailers & Info</h2>
       <div class="trailer-content">
-        <img src="https://via.placeholder.com/150x90" alt="Trailer">
-        <div>
-          <p>Director: Jon Favreau</p>
-          <p>Starring: Pedro Pascal, Gina Carano</p>
-          <p>Rating: PG-13</p>
+        <img src="https://via.placeholder.com/250x150" alt="Trailer">
+        <div class="trailer-info">
+          <p><strong>Director:</strong> Jon Favreau</p>
+          <p><strong>Starring:</strong> Pedro Pascal, Gina Carano</p>
+          <p><strong>Rating:</strong> PG-13</p>
         </div>
       </div>
     </div>
@@ -201,13 +219,25 @@
     <!-- Recommendations Section -->
     <div class="section recommendations">
       <h2>More Like This</h2>
-      <div class="recommendations-grid">
-        <img src="https://via.placeholder.com/150x225" alt="Recommendation 1">
-        <img src="https://via.placeholder.com/150x225" alt="Recommendation 2">
-        <img src="https://via.placeholder.com/150x225" alt="Recommendation 3">
-        <img src="https://via.placeholder.com/150x225" alt="Recommendation 4">
+      <button class="arrow left" onclick="scrollRecommendations(-250)">&#8249;</button>
+      <div class="recommendations-grid" id="recommendationsGrid">
+        <img src="https://via.placeholder.com/180x270" alt="Recommendation 1">
+        <img src="https://via.placeholder.com/180x270" alt="Recommendation 2">
+        <img src="https://via.placeholder.com/180x270" alt="Recommendation 3">
+        <img src="https://via.placeholder.com/180x270" alt="Recommendation 4">
+        <img src="https://via.placeholder.com/180x270" alt="Recommendation 5">
+        <img src="https://via.placeholder.com/180x270" alt="Recommendation 6">
       </div>
+      <button class="arrow right" onclick="scrollRecommendations(250)">&#8250;</button>
     </div>
   </div>
+
+  <script>
+    // Function to scroll the recommendations grid
+    function scrollRecommendations(distance) {
+      const grid = document.getElementById('recommendationsGrid');
+      grid.scrollBy({ left: distance, behavior: 'smooth' });
+    }
+  </script>
 </body>
 </html>
