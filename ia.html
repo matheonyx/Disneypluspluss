@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gemini Interface</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* Variables CSS pour les couleurs exactes de Gemini */
+    :root {
+      --background-color: #1A1A1A; /* Fond principal sombre */
+      --sidebar-color: #2E2E2E;   /* Barre latérale légèrement plus claire */
+      --text-color: #B0B0B0;      /* Texte principal gris clair */
+      --text-light: #A0A0A0;      /* Texte secondaire plus clair */
+      --icon-color: #FFFFFF;      /* Icônes blanches */
+    }
+
+    /* Styles globaux */
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      background: var(--background-color);
+      color: var(--text-color);
+    }
+
+    /* Conteneur principal avec flexbox */
+    .container {
+      display: flex;
+      height: 100vh;
+    }
+
+    /* Barre latérale */
+    .sidebar {
+      width: 15%; /* Largeur comme dans l'image */
+      background: var(--sidebar-color);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .top-section {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .text p:first-child {
+      font-size: 24px; /* Taille pour "Gemini" */
+      margin: 0;
+    }
+
+    .text p:last-child {
+      font-size: 16px; /* Taille pour "2.0 Flash" */
+      color: var(--text-light);
+      margin: 5px 0 20px 0;
+    }
+
+    .add-button {
+      width: 40px; /* Taille du bouton "+" */
+      height: 40px;
+      border: 2px solid var(--icon-color);
+      border-radius: 50%;
+      background: transparent;
+      color: var(--icon-color);
+      font-size: 24px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .spacer {
+      flex-grow: 1;
+    }
+
+    .bottom-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .bottom-section i {
+      margin: 10px 0;
+      font-size: 20px; /* Taille des icônes */
+      color: var(--icon-color);
+    }
+
+    /* Zone principale */
+    .main {
+      flex: 1;
+      background: var(--background-color);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .top-controls {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .top-controls div {
+      width: 20px;
+      height: 20px;
+      margin: 0 5px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: var(--icon-color);
+      cursor: pointer;
+    }
+
+    .central-text {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .central-text h1 {
+      font-size: 48px; /* Taille du texte central */
+      background: linear-gradient(to right, #00f, #f0f); /* Dégradé bleu à rose */
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .central-text .bonjour {
+      font-weight: bold;
+    }
+
+    .central-text .matheo {
+      font-weight: normal;
+    }
+
+    .input-area {
+      display: flex;
+      justify-content: center;
+      padding-bottom: 20px;
+    }
+
+    .input-wrapper {
+      position: relative;
+      width: 60%; /* Largeur de la zone de saisie */
+    }
+
+    .input-wrapper input {
+      width: 100%;
+      padding: 10px 50px 10px 10px;
+      border-radius: 20px;
+      border: 1px solid var(--text-light);
+      background: var(--sidebar-color);
+      color: var(--text-color);
+      font-size: 16px;
+      outline: none;
+    }
+
+    .input-wrapper input::placeholder {
+      color: var(--text-light);
+    }
+
+    .input-icons {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+    }
+
+    .input-icons i {
+      margin-left: 5px;
+      color: var(--icon-color);
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Barre latérale -->
+    <div class="sidebar">
+      <div class="top-section">
+        <div class="text">
+          <p>Gemini</p>
+          <p>2.0 Flash</p>
+        </div>
+        <button class="add-button">+</button>
+      </div>
+      <div class="spacer"></div>
+      <div class="bottom-section">
+        <i class="fas fa-question-circle"></i>
+        <i class="fas fa-cog"></i>
+        <i class="fas fa-user"></i>
+      </div>
+    </div>
+    <!-- Zone principale -->
+    <div class="main">
+      <div class="top-controls">
+        <div class="minimize">-</div>
+        <div class="maximize">□</div>
+        <div class="close">×</div>
+      </div>
+      <div class="central-text">
+        <h1><span class="bonjour">Bonjour</span> <span class="matheo">Mathéo</span></h1>
+      </div>
+      <div class="input-area">
+        <div class="input-wrapper">
+          <input type="text" placeholder="Demande à Gemini">
+          <div class="input-icons">
+            <i class="fas fa-camera"></i>
+            <i class="fas fa-equals"></i>
+            <i class="fas fa-microphone"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    // Pas de fonctionnalités demandées, donc script vide
+  </script>
+</body>
+</html>
