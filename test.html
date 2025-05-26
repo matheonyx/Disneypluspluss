@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Movie Slider</title>
+  <style>
+    body {
+      background: #141414; /* Entire page background */
+      margin: 0;
+    }
+
+    .randSliderContainer {
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+      max-width: 1720px;
+      margin: 0 auto;
+      padding: 20px;
+      background: #141414; /* Slider container background */
+    }
+
+    .randSlider {
+      position: relative;
+    }
+
+    .randTrack {
+      display: flex;
+      transition: transform 0.5s ease;
+    }
+
+    .randSlide {
+      flex: 0 0 344px;
+      margin-right: 16px;
+      outline: none;
+      opacity: 0;
+      transform: translateX(-20px); /* Fade-in from left effect */
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .randSlide.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .movieCard__container {
+      width: 100%;
+      height: auto;
+    }
+
+    .movieCard__poster {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .randArrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0, 0, 0, 0.7);
+      border: none;
+      padding: 10px 15px; /* Rectangular shape */
+      cursor: pointer;
+      z-index: 1000;
+      display: block;
+    }
+
+    .randPrev {
+      left: 20px;
+    }
+
+    .randNext {
+      right: 20px;
+    }
+
+    .randArrow svg {
+      width: 24px;
+      height: 24px;
+      fill: white;
+    }
+
+    .randArrow:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+
+    .randArrow:focus {
+      outline: none;
+    }
+
+    .randArrow:hover:not(:disabled) {
+      background: rgba(0, 0, 0, 0.9);
+    }
+  </style>
+</head>
+<body>
+  <article class="randSliderContainer">
+    <div class="randSlider">
+      <button class="randArrow randPrev" data-role="none" aria-label="Previous slide">
+        <svg class="MuiSvgIcon-root rand-arrows" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M11.67 3.87L9.9 2.1 0 12l9.9 9.9 1.77-1.77L3.54 12z"></path>
+        </svg>
+      </button>
+      <div class="randList">
+        <div class="randTrack">
+          <!-- Slides will be dynamically inserted here -->
+        </div>
+      </div>
+      <button class="randArrow randNext" data-role="none" aria-label="Next slide">
+        <svg class="MuiSvgIcon-root rand-arrows" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M5.88 4.12L13.76 12l-7.88 7.88L8 22l10-10L8 2z"></path>
+        </svg>
+      </button>
+    </div>
+  </article>
+
+  <script>
+    const movies = [
+      {
+        href: "https://magnetic-lowly-sodalite.glitch.me/venom3.html",
+        src: "https://cdn.glitch.global/dec50b52-1fc2-417a-80a4-dfe25959cc90/venom3.png?v=1730664265207",
+        alt: "Venom 3"
+      },
+      {
+        href: "https://magnetic-lowly-sodalite.glitch.me/spider%20man%20far%20from%20home.html",
+        src: "https://cdn.glitch.global/dec50b52-1fc2-417a-80a4-dfe25959cc90/spider%20man%20far%20from%20home.png?v=1725302851081",
+        alt: "Spider-Man: Far From Home"
+      },
+      {
+        href: "https://magnetic-lowly-sodalite.glitch.me/doctor%20strange%20in%20the%20multiverse%20of%20madness.html",
+        src: "https://cdn.glitch.global/dec50b52-1fc2-417a-80a4-dfe25959cc90/doctor%20strange%202.png?v=1731766676306",
+        alt: "Doctor Strange in the Multiverse of Madness"
+      },
+      {
+        href: "https://magnetic-lowly-sodalite.glitch.me/Black%20panther%20wakanda%20forever.html",
+        src: "https://cdn.glitch.global/dec50b52-1fc2-417a-80a4-dfe25959cc90/Black%20Panther%20Wakanda%20Forever.png?v=1724058827682",
+        alt: "Black Panther: Wakanda Forever"
+      },
+      {
+        href: "https://magnetic-lowly-sodalite.glitch.me/dragon%202.html",
+        src: "https://cdn.glitch.global/dec50b52-1fc2-417a-80a4-dfe25959cc90/dragons%2022.png?v=1727525145395",
+        alt: "How to Train Your Dragon 2"
+      }
+    ];
+
+    const randTrack = document.querySelector('.randTrack');
+    const randPrev = document.querySelector('.randPrev');
+    const randNext = document.querySelector('.randNext');
+    let currentIndex = 0;
+    let isSlidesLoaded = false;
+
+    function shuffleArray(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
+    }
+
+    function renderSlides() {
+      const shuffledMovies = shuffleArray([...movies]);
+      randTrack.innerHTML = '';
+      shuffledMovies.forEach((movie, index) => {
+        const slide = document.createElement('div');
+        slide.className = 'randSlide';
+        slide.style.width = '344px';
+        slide.innerHTML = `
+          <div class="movieCard">
+            <a href="${movie.href}">
+              <div class="movieCard__container">
+                <img class="movieCard__poster" src="${movie.src}" alt="${movie.alt}">
+              </div>
+            </a>
+          </div>
+        `;
+        randTrack.appendChild(slide);
+      });
+      isSlidesLoaded = true;
+      updateTrackPosition();
+      updateButtons();
+      // Add animation for slides
+      setTimeout(() => {
+        document.querySelectorAll('.randSlide').forEach((slide, index) => {
+          setTimeout(() => {
+            slide.classList.add('visible');
+          }, index * 100);
+        });
+      }, 50);
+    }
+
+    function updateTrackPosition() {
+      const slideWidth = 344 + 16; // Width + margin
+      randTrack.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
+    }
+
+    function updateButtons() {
+      randPrev.disabled = isSlidesLoaded && currentIndex === 0;
+      randNext.disabled = isSlidesLoaded && currentIndex >= movies.length - 5;
+    }
+
+    randPrev.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      if (!isSlidesLoaded) {
+        renderSlides();
+        currentIndex = 0;
+      } else if (currentIndex > 0) {
+        currentIndex--;
+        updateTrackPosition();
+      } else {
+        renderSlides();
+        currentIndex = 0;
+      }
+      updateButtons();
+    });
+
+    randNext.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      if (!isSlidesLoaded) {
+        renderSlides();
+        currentIndex = 0;
+      } else if (currentIndex < movies.length - 5) {
+        currentIndex++;
+        updateTrackPosition();
+      } else {
+        renderSlides();
+        currentIndex = 0;
+      }
+      updateButtons();
+    });
+
+    // Initial button state
+    updateButtons();
+  </script>
+</body>
+</html>

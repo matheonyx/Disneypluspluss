@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><link rel="icon" href="https://static-mh.content.disney.io/matterhorn/assets/favicon-94e3862e7fb9.ico"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#000000"><meta name="description" content="Disney+ UI Clone made with React by Tobías Corradi"><meta name="keywords" content="disney+ clone, tobías corradi, ui, front end, reactjs"><meta name="author" content="Tobías Corradi"><link rel="apple-touch-icon" href=""><link rel="manifest" href="manifest.json"><title>Disney++</title><link href="./Disney Clone made with React_files/2.165ff965.chunk.css" rel="stylesheet"><link href="./Disney Clone made with React_files/main.d27d7777.chunk.css" rel="stylesheet"><style data-jss="" data-meta="MuiTouchRipple">
+.MuiTouchRipple-root {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+  overflow: hidden;
+  position: absolute;
+  border-radius: inherit;
+  pointer-events: none;
+}
+.MuiTouchRipple-ripple {
+  opacity: 0;
+  position: absolute;
+}
+.MuiTouchRipple-rippleVisible {
+  opacity: 0.3;
+  animation: MuiTouchRipple-keyframes-enter 550ms cubic-bezier(0.4, 0, 0.2, 1);
+  transform: scale(1);
+}
+.MuiTouchRipple-ripplePulsate {
+  animation-duration: 200ms;
+}
+.MuiTouchRipple-child {
+  width: 100%;
+  height: 100%;
+  display: block;
+  opacity: 1;
+  border-radius: 50%;
+  background-color: currentColor;
+}
+.MuiTouchRipple-childLeaving {
+  opacity: 0;
+  animation: MuiTouchRipple-keyframes-exit 550ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.MuiTouchRipple-childPulsate {
+  top: 0;
+  left: 0;
+  position: absolute;
+  animation: MuiTouchRipple-keyframes-pulsate 2500ms cubic-bezier(0.4, 0, 0.2, 1) 200ms infinite;
+}
+@-webkit-keyframes MuiTouchRipple-keyframes-enter {
+  0% {
+    opacity: 0.1;
+    transform: scale(0);
+  }
+  100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+}
+@-webkit-keyframes MuiTouchRipple-keyframes-exit {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@-webkit-keyframes MuiTouchRipple-keyframes-pulsate {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.92);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+</style><style data-jss="" data-meta="MuiButtonBase">
+.MuiButtonBase-root {
+  color: inherit;
+  border: 0;
+  cursor: pointer;
+  margin: 0;
+  display: inline-flex;
+  outline: 0;
+  padding: 0;
+  position: relative;
+  align-items: center;
+  user-select: none;
+  border-radius: 0;
+  vertical-align: middle;
+  -moz-appearance: none;
+  justify-content: center;
+  text-decoration: none;
+  background-color: transparent;
+  -webkit-appearance: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.MuiButtonBase-root::-moz-focus-inner {
+  border-style: none;
+}
+.MuiButtonBase-root.Mui-disabled {
+  cursor: default;
+  pointer-events: none;
+}
+@media print {
+  .MuiButtonBase-root {
+    -webkit-print-color-adjust: exact;
+  }
+}
+</style><style data-jss="" data-meta="MuiButton">
+.MuiButton-root {
+  color: rgba(0, 0, 0, 0.87);
+  padding: 6px 16px;
+  font-size: 0.875rem;
+  min-width: 64px;
+  box-sizing: border-box;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  font-weight: 500;
+  line-height: 1.75;
+  border-radius: 4px;
+  letter-spacing: 0.02857em;
+  text-transform: uppercase;
+}
+.MuiButton-root:hover {
+  text-decoration: none;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+.MuiButton-root.Mui-disabled {
+  color: rgba(0, 0, 0, 0.26);
+}
+@media (hover: none) {
+  .MuiButton-root:hover {
+    background-color: transparent;
+  }
+}
+.MuiButton-root:hover.Mui-disabled {
+  background-color: transparent;
+}
+.MuiButton-label {
+  width: 100%;
+  display: inherit;
+  align-items: inherit;
+  justify-content: inherit;
+}
+.MuiButton-text {
+  padding: 6px 8px;
+}
+.MuiButton-textPrimary {
+  color: #3f51b5;
+}
+.MuiButton-textPrimary:hover {
+  background-color: rgba(63, 81, 181, 0.04);
+}
+@media (hover: none) {
+  .MuiButton-textPrimary:hover {
+    background-color: transparent;
+  }
+}
+.MuiButton-textSecondary {
+  color: #f50057;
+}
+.MuiButton-textSecondary:hover {
+  background-color: rgba(245, 0, 87, 0.04);
+}
+@media (hover: none) {
+  .MuiButton-textSecondary:hover {
+    background-color: transparent;
+  }
+}
+.MuiButton-outlined {
+  border: 1px solid rgba(0, 0, 0, 0.23);
+  padding: 5px 15px;
+}
+.MuiButton-outlined.Mui-disabled {
+  border: 1px solid rgba(0, 0, 0, 0.12);
+}
+.MuiButton-outlinedPrimary {
+  color: #3f51b5;
+  border: 1px solid rgba(63, 81, 181, 0.5);
+}
+.MuiButton-outlinedPrimary:hover {
+  border: 1px solid #3f51b5;
+  background-color: rgba(63, 81, 181, 0.04);
+}
+@media (hover: none) {
+  .MuiButton-outlinedPrimary:hover {
+    background-color: transparent;
+  }
+}
+.MuiButton-outlinedSecondary {
+  color: #f50057;
+  border: 1px solid rgba(245, 0, 87, 0.5);
+}
+.MuiButton-outlinedSecondary:hover {
+  border: 1px solid #f50057;
+  background-color: rgba(245, 0, 87, 0.04);
+}
+.MuiButton-outlinedSecondary.Mui-disabled {
+  border: 1px solid rgba(0, 0, 0, 0.26);
+}
+@media (hover: none) {
+  .MuiButton-outlinedSecondary:hover {
+    background-color: transparent;
+  }
+}
+.MuiButton-contained {
+  color: rgba(0, 0, 0, 0.87);
+  box-shadow: 0px 3px 1px -2px rgba(0,0,0,0.2),0px 2px 2px 0px rgba(0,0,0,0.14),0px 1px 5px 0px rgba(0,0,0,0.12);
+  background-color: #e0e0e0;
+}
+.MuiButton-contained:hover {
+  box-shadow: 0px 2px 4px -1px rgba(0,0,0,0.2),0px 4px 5px 0px rgba(0,0,0,0.14),0px 1px 10px 0px rgba(0,0,0,0.12);
+  background-color: #d5d5d5;
+}
+.MuiButton-contained.Mui-focusVisible {
+  box-shadow: 0px 3px 5px -1px rgba(0,0,0,0.2),0px 6px 10px 0px rgba(0,0,0,0.14),0px 1px 18px 0px rgba(0,0,0,0.12);
+}
+.MuiButton-contained:active {
+  box-shadow: 0px 5px 5px -3px rgba(0,0,0,0.2),0px 8px 10px 1px rgba(0,0,0,0.14),0px 3px 14px 2px rgba(0,0,0,0.12);
+}
+.MuiButton-contained.Mui-disabled {
+  color: rgba(0, 0, 0, 0.26);
+  box-shadow: none;
+  background-color: rgba(0, 0, 0, 0.12);
+}
+@media (hover: none) {
+  .MuiButton-contained:hover {
+    box-shadow: 0px 3px 1px -2px rgba(0,0,0,0.2),0px 2px 2px 0px rgba(0,0,0,0.14),0px 1px 5px 0px rgba(0,0,0,0.12);
+    background-color: #e0e0e0;
+  }
+}
+.MuiButton-contained:hover.Mui-disabled {
+  background-color: rgba(0, 0, 0, 0.12);
+}
+.MuiButton-containedPrimary {
+  color: #fff;
+  background-color: #3f51b5;
+}
+.MuiButton-containedPrimary:hover {
+  background-color: #303f9f;
+}
+@media (hover: none) {
+  .MuiButton-containedPrimary:hover {
+    background-color: #3f51b5;
+  }
+}
+.MuiButton-containedSecondary {
+  color: #fff;
+  background-color: #f50057;
+}
+.MuiButton-containedSecondary:hover {
+  background-color: #c51162;
+}
+@media (hover: none) {
+  .MuiButton-containedSecondary:hover {
+    background-color: #f50057;
+  }
+}
+.MuiButton-disableElevation {
+  box-shadow: none;
+}
+.MuiButton-disableElevation:hover {
+  box-shadow: none;
+}
+.MuiButton-disableElevation.Mui-focusVisible {
+  box-shadow: none;
+}
+.MuiButton-disableElevation:active {
+  box-shadow: none;
+}
+.MuiButton-disableElevation.Mui-disabled {
+  box-shadow: none;
+}
+.MuiButton-colorInherit {
+  color: inherit;
+  border-color: currentColor;
+}
+.MuiButton-textSizeSmall {
+  padding: 4px 5px;
+  font-size: 0.8125rem;
+}
+.MuiButton-textSizeLarge {
+  padding: 8px 11px;
+  font-size: 0.9375rem;
+}
+.MuiButton-outlinedSizeSmall {
+  padding: 3px 9px;
+  font-size: 0.8125rem;
+}
+.MuiButton-outlinedSizeLarge {
+  padding: 7px 21px;
+  font-size: 0.9375rem;
+}
+.MuiButton-containedSizeSmall {
+  padding: 4px 10px;
+  font-size: 0.8125rem;
+}
+.MuiButton-containedSizeLarge {
+  padding: 8px 22px;
+  font-size: 0.9375rem;
+}
+.MuiButton-fullWidth {
+  width: 100%;
+}
+.MuiButton-startIcon {
+  display: inherit;
+  margin-left: -4px;
+  margin-right: 8px;
+}
+.MuiButton-startIcon.MuiButton-iconSizeSmall {
+  margin-left: -2px;
+}
+.MuiButton-endIcon {
+  display: inherit;
+  margin-left: 8px;
+  margin-right: -4px;
+}
+.MuiButton-endIcon.MuiButton-iconSizeSmall {
+  margin-right: -2px;
+}
+.MuiButton-iconSizeSmall > *:first-child {
+  font-size: 18px;
+}
+.MuiButton-iconSizeMedium > *:first-child {
+  font-size: 20px;
+}
+.MuiButton-iconSizeLarge > *:first-child {
+  font-size: 22px;
+}
+</style><style data-jss="" data-meta="MuiSvgIcon">
+.MuiSvgIcon-root {
+  fill: currentColor;
+  width: 1em;
+  height: 1em;
+  display: inline-block;
+  font-size: 1.5rem;
+  transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  flex-shrink: 0;
+  user-select: none;
+}
+.MuiSvgIcon-colorPrimary {
+  color: #3f51b5;
+}
+.MuiSvgIcon-colorSecondary {
+  color: #f50057;
+}
+.MuiSvgIcon-colorAction {
+  color: rgba(0, 0, 0, 0.54);
+}
+.MuiSvgIcon-colorError {
+  color: #f44336;
+}
+.MuiSvgIcon-colorDisabled {
+  color: rgba(0, 0, 0, 0.26);
+}
+.MuiSvgIcon-fontSizeInherit {
+  font-size: inherit;
+}
+.MuiSvgIcon-fontSizeSmall {
+  font-size: 1.25rem;
+}
+.MuiSvgIcon-fontSizeLarge {
+  font-size: 2.1875rem;
+}
+</style><style data-jss="" data-meta="MuiAvatar">
+.MuiAvatar-root {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  overflow: hidden;
+  position: relative;
+  font-size: 1.25rem;
+  align-items: center;
+  flex-shrink: 0;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  line-height: 1;
+  user-select: none;
+  border-radius: 50%;
+  justify-content: center;
+}
+.MuiAvatar-colorDefault {
+  color: #fafafa;
+  background-color: #bdbdbd;
+}
+.MuiAvatar-rounded {
+  border-radius: 4px;
+}
+.MuiAvatar-square {
+  border-radius: 0;
+}
+.MuiAvatar-img {
+  color: transparent;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  text-align: center;
+  text-indent: 10000px;
+}
+.MuiAvatar-fallback {
+  width: 75%;
+  height: 75%;
+}
+</style></head><body><noscript>You need to enable JavaScript to run this app.</noscript><div id="root"><header><nav class="navbar"><svg class="MuiSvgIcon-root navbar__menuIcon" focusable="false" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"></path></svg><a href="https://pale-cuddly-sunset.glitch.me/Choisir%20votre%20profil.htm"><img id="logo" src="" alt=""></a><ul class="navbar__list"><li class="navbar__buttonWrapper"><button class="MuiButtonBase-root MuiButton-root MuiButton-text navbar__button" tabindex="0" type="button"><span class="MuiButton-label"><span class="MuiButton-startIcon MuiButton-iconSizeMedium"><svg class="MuiSvgIcon-root" focusable="false" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"></path></svg></span>Home</span><span class="MuiTouchRipple-root"></span></button></li><li class="navbar__buttonWrapper"><a href="https://heliotrope-ancient-mockingbird.glitch.me/Disney%2B%2B%20search.html"><button class="MuiButtonBase-root MuiButton-root MuiButton-text navbar__button" tabindex="0" type="button"><span class="MuiButton-label"><span class="MuiButton-startIcon MuiButton-iconSizeMedium"><svg class="MuiSvgIcon-root" focusable="false" viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path></svg></span>Search</span><span class="MuiTouchRipple-root"></span></button></a></li><li class="navbar__buttonWrapper"><button class="MuiButtonBase-root MuiButton-root MuiButton-text navbar__button" tabindex="0" type="button"><span class="MuiButton-label"><span class="MuiButton-startIcon MuiButton-iconSizeMedium"><svg class="MuiSvgIcon-root" focusable="false" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"></path></svg></span>Watchlist</span><span class="MuiTouchRipple-root"></span></button></li><li class="navbar__buttonWrapper"><a href="https://careful-immense-replace.glitch.me/Originals.html"><button class="MuiButtonBase-root MuiButton-root MuiButton-text navbar__button" tabindex="0" type="button"><span class="MuiButton-label"><span class="MuiButton-startIcon MuiButton-iconSizeMedium"><svg class="MuiSvgIcon-root" focusable="false" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path></svg></span>Originals</span><span class="MuiTouchRipple-root"></span></button></a></li><li class="navbar__buttonWrapper"><button class="MuiButtonBase-root MuiButton-root MuiButton-text navbar__button" tabindex="0" type="button"><span class="MuiButton-label"><span class="MuiButton-startIcon MuiButton-iconSizeMedium"><svg class="MuiSvgIcon-root" focusable="false" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 4l2 4h-3l-2-4h-2l2 4h-3l-2-4H8l2 4H7L5 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4h-4z"></path></svg></span>Movies</span><span class="MuiTouchRipple-root"></span></button></li><li class="navbar__buttonWrapper"><button class="MuiButtonBase-root MuiButton-root MuiButton-text navbar__button" tabindex="0" type="button"><span class="MuiButton-label"><span class="MuiButton-startIcon MuiButton-iconSizeMedium"><svg class="MuiSvgIcon-root" focusable="false" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h5v2h8v-2h5c1.1 0 1.99-.9 1.99-2L23 5c0-1.1-.9-2-2-2zm0 14H3V5h18v12z"></path></svg></span>Series</span><span class="MuiTouchRipple-root"></span></button></li></ul></nav><div class="userSelector"><span class="userSelector__name">Mathéo</span><div class="MuiAvatar-root MuiAvatar-circle"><img src="https://featuredanimation.com/wp-content/uploads/2022/02/Disgust-Disney-Plus-Icon.jpg" class="MuiAvatar-img"></div></div></header><main class="home"><div class="home__container movieRows__container"><article><div class="slick-slider imageSlider slick-initialized" dir="ltr"><button type="button" data-role="none" class="slick-arrow slick-prev" style="display: block;"> Previous</button><div class="slick-list"><div class="slick-track" style="width: 18920px; opacity: 1; transform: translate3d(-3440px, 0px, 0px);"><div data-index="-1" tabindex="-1" class="slick-slide slick-cloned" aria-hidden="true" style="width: 1720px;"><div><div class="slider__container" tabindex="-1" style="width: 100%; display: inline-block;"><img class="slider__textImage" src="./Disney Clone made with React_files/scale(1)"><div class="slider__imgContainer"><img class="slider__img" src="./Disney Clone made with React_files/scale(2)"></div></div></div></div><div data-index="0" class="slick-slide" tabindex="-1" aria-hidden="true" style="outline: none; width: 1720px;"><div><div class="slider__container" tabindex="-1" style="width: 100%; display: inline-block;"><img class="slider__textImage" src="./Disney Clone made with React_files/scale(3)"><div class="slider__imgContainer"><img class="slider__img" src=""></div></div></div></div><div data-index="1" class="slick-slide slick-active slick-current" tabindex="-1" aria-hidden="false" style="outline: none; width: 1720px;"><div><div class="slider__container" tabindex="-1" style="width: 100%; display: inline-block;"><img class="slider__textImage" src="https://cdn.glitch.global/dec50b52-1fc2-417a-80a4-dfe25959cc90/Frozen%202.png?v=1716491767906"><div class="slider__imgContainer"><img class="slider__img" src="https://cdn.glitch.global/dec50b52-1fc2-417a-80a4-dfe25959cc90/Frozen%202.png?v=1716491767906"></div></div></div></div><div data-index="2" class="slick-slide" tabindex="-1" aria-hidden="true" style="outline: none; width: 1720px;"><div><div class="slider__container" tabindex="-1" style="width: 100%; display: inline-block;"><img class="slider__textImage" src="https://cdn.glitch.global/dec50b52-1fc2-417a-80a4-dfe25959cc90/Frozen%202.png?v=1716491767906"><div class="slider__imgContainer"><img class="slider__img" src="https://cdn.glitch.global/dec50b52-1fc2-417a-80a4-dfe25959cc90/Frozen%202.png?v=1716491767906"></div></div></div></div><div data-index="3" class="slick-slide" tabindex="-1" aria-hidden="true" style="outline: none; width: 1720px;"><div><div class="slider__container" tabindex="-1" style="width: 100%; display: inline-block;"><img class="slider__textImage" src="./Disney Clone made with React_files/scale(9)"><div class="slider__imgContainer"><img class="slider__img" src="./Disney Clone made with React_files/scale(10)"></div></div></div></div><div data-index="4" class="slick-slide" tabindex="-1" aria-hidden="true" style="outline: none; width: 1720px;"><div><div class="slider__container" tabindex="-1" style="width: 100%; display: inline-block;"><img class="slider__textImage" src="./Disney Clone made with React_files/scale(1)"><div class="slider__imgContainer"><img class="slider__img" src="./Disney Clone made with React_files/scale(2)"></div></div></div></div><div data-index="5" tabindex="-1" class="slick-slide slick-cloned" aria-hidden="true" style="width: 1720px;"><div><div class="slider__container" tabindex="-1" style="width: 100%; display: inline-block;"><img class="slider__textImage" src="./Disney Clone made with React_files/scale(3)"><div class="slider__imgContainer"><img class="slider__img" src="./Disney Clone made with React_files/scale(4)"></div></div></div></div><div data-index="6" tabindex="-1" class="slick-slide slick-cloned" aria-hidden="true" style="width: 1720px;"><div><div class="slider__container" tabindex="-1" style="width: 100%; display: inline-block;"><img class="slider__textImage" src="./Disney Clone made with React_files/scale(5)"><div class="slider__imgContainer"><img class="slider__img" src="./Disney Clone made with React_files/scale(6)"></div></div></div></div><div data-index="7" tabindex="-1" class="slick-slide slick-cloned" aria-hidden="true" style="width: 1720px;"><div><div class="slider__container" tabindex="-1" style="width: 100%; display: inline-block;"><img class="slider__textImage" src="./Disney Clone made with React_files/scale(7)"><div class="slider__imgContainer"><img class="slider__img" src="./Disney Clone made with React_files/scale(8)"></div></div></div></div><div data-index="8" tabindex="-1" class="slick-slide slick-cloned" aria-hidden="true" style="width: 1720px;"><div><div class="slider__container" tabindex="-1" style="width: 100%; display: inline-block;"><img class="slider__textImage" src="./Disney Clone made with React_files/scale(9)"><div class="slider__imgContainer"><img class="slider__img" src="./Disney Clone made with React_files/scale(10)"></div></div></div></div><div data-index="9" tabindex="-1" class="slick-slide slick-cloned" aria-hidden="true" style="width: 1720px;"><div><div class="slider__container" tabindex="-1" style="width: 100%; display: inline-block;"><img class="slider__textImage" src="./Disney Clone made with React_files/scale(1)"><div class="slider__imgContainer"><img class="slider__img" src="./Disney Clone made with React_files/scale(2)"></div></div></div></div></div></div><button type="button" data-role="none" class="slick-arrow slick-next" style="display: block;"> Next</button><ul class="slick-dots" style="display: block;"><li class=""><button>1</button></li><li class="slick-active"><button>2</button></li><li class=""><button>3</button></li><li class=""><button>4</button></li><li class=""><button>5</button></li><li class=""><button>6</button></li></ul></div></article><section class="collections"><div class="regular slider "><a href="https://defiant-morning-era.glitch.me/Disney%20page.html"><div class="collectionsCards"><div class="collectionsCards__container"><img class="collectionsCards__image" src="https://cdn.glitch.global/dec50b52-1fc2-417a-80a4-dfe25959cc90/scale(11).png?v=1716492794587" alt=""><video class="collectionsCards__video" width="320" height="240" loop="" playsinline=""><source src="https://vod-bgc-sa-east-1.media.dssott.com/bgui/ps01/disney/bgui/2019/08/01/1564674844-disney.mp4" type="video/mp4"></video></div></div></a><a href="https://thoracic-stingy-receipt.glitch.me/Pixar%20Page.html"><div class="collectionsCards"><div class="collectionsCards__container"><img class="collectionsCards__image" src="https://cdn.glitch.global/dec50b52-1fc2-417a-80a4-dfe25959cc90/scale(12).png?v=1716492932612" alt=""><video class="collectionsCards__video" width="320" height="240" loop="" playsinline=""><source src="https://vod-bgc-sa-east-1.media.dssott.com/bgui/ps01/disney/bgui/2019/08/01/1564676714-pixar.mp4" type="video/mp4"></video></div></div></a><a href="https://chisel-calico-tent.glitch.me/Marvel%20Page.html"><div class="collectionsCards"><div class="collectionsCards__container"><img class="collectionsCards__image" src="https://cdn.glitch.global/dec50b52-1fc2-417a-80a4-dfe25959cc90/scale(13).png?v=1716492782553" alt=""><video class="collectionsCards__video" width="320" height="240" loop="" playsinline=""><source src="https://vod-bgc-sa-east-1.media.dssott.com/bgui/ps01/disney/bgui/2019/08/01/1564676115-marvel.mp4" type="video/mp4"></video></div></div></a><a href="file:///G:/Disney++/Star%20Wars%20Page.html"><div class="collectionsCards"><div class="collectionsCards__container"><img class="collectionsCards__image" src="https://cdn.glitch.global/dec50b52-1fc2-417a-80a4-dfe25959cc90/scale(14).png?v=1716492789921" alt=""><video class="collectionsCards__video" width="320" height="240" loop="" playsinline=""><source src="https://vod-bgc-sa-east-1.media.dssott.com/bgui/ps01/disney/bgui/2020/04/03/1585929840-star-wars.mp4" type="video/mp4"></video></div></div></a><a href="https://legend-tiny-quality.glitch.me/Hulu%20page.html"><div class="collectionsCards"><div class="collectionsCards__container"><img class="collectionsCards__image" src="https://cdn.glitch.global/dec50b52-1fc2-417a-80a4-dfe25959cc90/%5Bremoval.ai%5D_b03dc4a2-e0bf-45c1-9efd-1a2090eda6e1-design-sans-titre-77_5WWL0N.png?v=1723280406372" alt=""><video class="collectionsCards__video" width="320" height="240" loop="" playsinline=""><source src="file:///G:/Disney++/Energy%20ball.mp4" type="video/mp4"></video></div></div></a></div></section>
